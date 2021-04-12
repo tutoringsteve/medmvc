@@ -33,7 +33,7 @@ Git console was used to manage version control and uploading to the upstream rep
 I would like to do the following in no particular order.
 - Add a GUI interface for password enabled login, and forms to add new patients, diseases, and doctors.
 - Enhance the output to something better than simple HTML tables
-- Not use thymeleaf
+- Make the thymeleaf view code more scalable, possibly switching to some other tool altogether.
 - have the view code be more scalable to arbitrary data sizes and give a pretty interface for viewing SQL queries on the data base.
 
 ## Ending notes
