@@ -16,7 +16,7 @@ The debugging console has been enabled in the application.properties file so tha
 ```
 o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:2ad35653-231d-4e9d-9f7a-bd4afab5a6c7'
 ```
-Copy the `'jdbc:h2:mem:2ad35653-231d-4e9d-9f7a-bd4afab5a6c7'` string into the JDBC URL: field in the h2-console and press connect to view the database where you can also run SQL queries.
+Copy the `'jdbc:h2:mem:2ad35653-231d-4e9d-9f7a-bd4afab5a6c7'` (note this string will be different on each run) string into the JDBC URL: field in the h2-console and press connect to view the database where you can also run SQL queries.
 
 You may find that your port 8080 is being used. You can either configure the tomcat server to use a different port or you may find and kill any processes which are listening on that port.
 
