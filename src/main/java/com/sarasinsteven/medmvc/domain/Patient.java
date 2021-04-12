@@ -20,6 +20,9 @@ public class Patient {
     @ManyToMany(mappedBy = "patients")
     private Set<Doctor> doctors = new HashSet<>();
 
+    @ManyToMany(mappedBy = "patients")
+    private Set<Disease> diseases = new HashSet<>();
+
     public String getFirstName() {
         return firstName;
     }
@@ -44,12 +47,21 @@ public class Patient {
         this.doctors = doctors;
     }
 
+    public Set<Disease> getDiseases() {
+        return diseases;
+    }
+
+    public void setDiseases(Set<Disease> diseases) {
+        this.diseases = diseases;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 doctorNames() +
+                diseaseNames() +
                 '}';
     }
 
@@ -74,6 +86,39 @@ public class Patient {
                 if(i < doctors.size() - 1) {
                     names += ", ";
                 }
+
+                i++;
+            }
+
+            names += "}";
+        }
+
+        return names;
+    }
+
+    /**
+     * Prints out a JSON like string of diseases {type1, type2 ,...}
+     * @return JSON like string representing the list of diseases by type.
+     */
+    public String diseaseNames() {
+
+        String names = "";
+
+        if(diseases.size() != 0) {
+            names += ", diseases={";
+
+            int i = 0;
+
+
+            for(Disease d : diseases) {
+
+                names += d.getType();
+
+                if(i < diseases.size() - 1) {
+                    names += ", ";
+                }
+
+                i++;
             }
 
             names += "}";

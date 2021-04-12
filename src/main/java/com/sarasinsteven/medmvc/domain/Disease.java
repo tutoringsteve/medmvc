@@ -5,40 +5,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Doctor {
+public class Disease {
 
     @Id
     //tells Hibernate that the underlying database is going to be providing the generation of this
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String firstName;
-    private String lastName;
     private String type;
 
     @ManyToMany
-    @JoinTable(name = "patient_doctor", joinColumns = @JoinColumn(name = "doctor_id"),
+    @JoinTable(name = "patient_disease", joinColumns = @JoinColumn(name = "disease_id"),
             inverseJoinColumns = @JoinColumn(name = "patient_id"))
     private Set<Patient> patients = new HashSet<>();
 
     //JPA requires a 0 arg constructor
-    public Doctor() {
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public Disease() {
     }
 
     public String getType() {
@@ -59,10 +41,8 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "Doctor{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", type='" + type + '\'' +
+        return "Disease{" +
+                "type='" + type + '\'' +
                 patientNames() +
                 '}';
     }
@@ -98,16 +78,14 @@ public class Doctor {
         return names;
     }
 
-
-    //Have to override equals and hashCode to base equals off of the generated ID so that Hibernate and things like Sets consider objects with the same ID to be equal.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Doctor doctor = (Doctor) o;
+        Disease disease = (Disease) o;
 
-        return id != null ? id.equals(doctor.id) : doctor.id == null;
+        return id != null ? id.equals(disease.id) : disease.id == null;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.sarasinsteven.medmvc.bootstrap;
 
+import com.sarasinsteven.medmvc.domain.Disease;
 import com.sarasinsteven.medmvc.domain.Doctor;
 import com.sarasinsteven.medmvc.domain.Patient;
+import com.sarasinsteven.medmvc.repositories.DiseaseRepository;
 import com.sarasinsteven.medmvc.repositories.DoctorRepository;
 import com.sarasinsteven.medmvc.repositories.PatientRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -16,10 +18,13 @@ public class BootStrapData implements CommandLineRunner {
 
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
+    private final DiseaseRepository diseaseRepository;
 
-    public BootStrapData(DoctorRepository doctorRepository, PatientRepository patientRepository) {
+    public BootStrapData(DoctorRepository doctorRepository, PatientRepository patientRepository,
+                         DiseaseRepository diseaseRepository) {
         this.doctorRepository = doctorRepository;
         this.patientRepository = patientRepository;
+        this.diseaseRepository = diseaseRepository;
     }
 
 
@@ -57,6 +62,17 @@ public class BootStrapData implements CommandLineRunner {
         riemann.setLastName("Riemann");
         riemann.setType("Oncologist");
 
+        //save all patients and doctors
+        patientRepository.save(ramanujan);
+        patientRepository.save(newton);
+        patientRepository.save(noether);
+        doctorRepository.save(euler);
+        doctorRepository.save(gauss);
+        doctorRepository.save(riemann);
+
+        System.out.println("Patients: " + ramanujan.toString() + ", " + newton.toString() + ", " + noether.toString());
+        System.out.println("Dcotors: " + euler.toString() + ", " + gauss.toString() + ", " + riemann.toString());
+
         //assign doctors to patients
         ramanujan.getDoctors().add(euler);
         newton.getDoctors().add(euler);
@@ -84,8 +100,50 @@ public class BootStrapData implements CommandLineRunner {
         System.out.println("Number of patients: " + patientRepository.count());
         System.out.println("Number of doctors: " + doctorRepository.count());
 
+        System.out.println("Assigning doctors to patients and patients to doctors");
         System.out.println("Patients: " + ramanujan.toString() + ", " + newton.toString() + ", " + noether.toString());
         System.out.println("Dcotors: " + euler.toString() + ", " + gauss.toString() + ", " + riemann.toString());
+
+        //create diseases...
+        Disease diabetes = new Disease();
+        diabetes.setType("diabetes");
+
+        Disease skinCancer = new Disease();
+        skinCancer.setType("skin cancer");
+
+        Disease psoriasis = new Disease();
+        psoriasis.setType("psoriasis");
+
+        //save all diseases
+        diseaseRepository.save(diabetes);
+        diseaseRepository.save(skinCancer);
+        diseaseRepository.save(psoriasis);
+
+        System.out.println("Diseases:" + diabetes.toString() + " " + skinCancer.toString() + " " + psoriasis.toString());
+
+        //assign diseases to patients
+        ramanujan.getDiseases().add(diabetes);
+        newton.getDiseases().add(skinCancer);
+        newton.getDiseases().add(psoriasis);
+        noether.getDiseases().add(psoriasis);
+
+        //assign patients to diseases
+        diabetes.getPatients().add(ramanujan);
+        skinCancer.getPatients().add(newton);
+        psoriasis.getPatients().add(newton);
+        psoriasis.getPatients().add(noether);
+
+        //save all diseases and patients
+        diseaseRepository.save(diabetes);
+        diseaseRepository.save(skinCancer);
+        diseaseRepository.save(psoriasis);
+        patientRepository.save(ramanujan);
+        patientRepository.save(newton);
+        patientRepository.save(noether);
+
+        System.out.println("Assigning diseases to patients and patients to diseases");
+        System.out.println("Patients: " + ramanujan.toString() + ", " + newton.toString() + ", " + noether.toString());
+        System.out.println("Diseases:" + diabetes.toString() + " " + skinCancer.toString() + " " + psoriasis.toString());
 
     }
 }
