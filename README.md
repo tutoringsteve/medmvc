@@ -32,8 +32,9 @@ Git console was used to manage version control and uploading to the upstream rep
 ## Wishes for future release
 I would like to do the following in no particular order.
 - Add a GUI interface for password enabled login, and forms to add new patients, diseases, and doctors.
+- Expand the types of data that is stored. Dates for doctor's visits, perscriptions, billing stuff, so many options to expand upon.
+- Implement security features to hide or restrict database output depending on the user.
 - Enhance the output to something better than simple HTML tables
-- Make the thymeleaf view code more scalable, possibly switching to some other tool altogether.
 - have the view code be more scalable to arbitrary data sizes and give a pretty interface for viewing SQL queries on the data base.
 
 ## Ending notes
