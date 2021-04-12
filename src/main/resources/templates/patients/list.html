@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Add the thymeleaf name space and alias it as th -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Med MVC</title>
+</head>
+<body>
+<h1>Patient list</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Doctor 1</th>
+        <th>Doctor 2</th>
+        <th>Doctor 3</th>
+        <th>Disease 1</th>
+        <th>Disease 2</th>
+    </tr>
+    <!-- thymeleaf iterator will render this element for each book -->
+    <tr th:each="patient : ${patients}">
+        <td th:text="${patient.id}">123123</td>
+        <td th:text="${patient.firstName}">Steven</td>
+        <td th:text="${patient.lastName}">Sarasin</td>
+        <td>
+            <span th:if="${#sets.size(patient.doctors) &gt; 0}">
+                <span th:text="|&emsp;${patient.doctors[0].type} ${patient.doctors[0].firstName} ${patient.doctors[0].lastName}|"></span>
+            </span>
+            <span th:unless="${#sets.size(patient.doctors) &gt; 0}">&emsp;</span>
+        </td>
+        <td>
+            <span th:if="${#sets.size(patient.doctors) &gt; 1}">
+                <span th:text="|&emsp;${patient.doctors[1].type} ${patient.doctors[1].firstName} ${patient.doctors[1].lastName}|"></span>
+            </span>
+            <span th:unless="${#sets.size(patient.doctors) &gt; 1}">&emsp;</span>
+        </td>
+        <td>
+            <span th:if="${#sets.size(patient.doctors) &gt; 2}">
+                <span th:text="|&emsp;${patient.doctors[2].type} ${patient.doctors[2].firstName} ${patient.doctors[2].lastName}|"></span>
+            </span>
+            <span th:unless="${#sets.size(patient.doctors) &gt; 2}">&emsp;</span>
+        </td>
+        <td>
+            <span th:if="${#sets.size(patient.diseases) &gt; 0}">
+                <span th:text="|&emsp;${patient.diseases[0].type}|"></span>
+            </span>
+            <span th:unless="${#sets.size(patient.diseases) &gt; 0}">&emsp;</span>
+        </td>
+        <td>
+            <span th:if="${#sets.size(patient.diseases) &gt; 1}">
+                <span th:text="|&emsp;${patient.diseases[1].type}|"></span>
+            </span>
+            <span th:unless="${#sets.size(patient.diseases) &gt; 1}">&emsp;</span>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
