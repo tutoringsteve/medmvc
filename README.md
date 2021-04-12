@@ -7,7 +7,7 @@ This project creates an in-memory data base of health care domain specific entit
 
 ## How to use
 1. Clone the repo to an IDE of your choosing. This project was made entirely in intellij community edition.
-2. Run the program from the main argument in the `MedmvcApplication` which contains the main() method.
+2. Run the program from the class `MedmvcApplication` which contains the main() method.
 3. Go to the local host http://localhost:8080/patients , http://localhost:8080/doctors, and http://localhost:8080/diseases to see the three different views that can currently be generated.
 4. Optionally you may look at the string representation of the data which is printed to console in a JSON like format.
 
