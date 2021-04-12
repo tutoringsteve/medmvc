@@ -18,7 +18,7 @@ public class PatientController {
 
     //When we do an action against the URL of /patients this method is going to be envoked.
     @RequestMapping("/patients")
-    public String getBooks(Model model){
+    public String getPatients(Model model){
 
         model.addAttribute("patients", patientRepository.findAll());
         //This is going to be the view name.

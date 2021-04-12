@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- Add the thymeleaf name space and alias it as th -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Med MVC</title>
+</head>
+<body>
+<h1>Doctor list</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>&emsp;First Name</th>
+        <th>&emsp;Last Name</th>
+        <th>Patient 1</th>
+        <th>Patient 2</th>
+        <th>Patient 3</th>
+    </tr>
+    <!-- thymeleaf iterator will render this element for each book -->
+    <tr th:each="doctor : ${doctors}">
+        <td th:text="${doctor.id}">123123</td>
+        <td th:text="|&emsp;${doctor.type}|">General Practitioner</td>
+        <td th:text="|&emsp;${doctor.firstName}|">Steven</td>
+        <td th:text="|&emsp;${doctor.lastName}|">Sarasin</td>
+        <td>
+            <span th:if="${#sets.size(doctor.patients) &gt; 0}">
+                <span th:text="|&emsp;${doctor.patients[0].firstName} ${doctor.patients[0].lastName}|"></span>
+            </span>
+            <span th:unless="${#sets.size(doctor.patients) &gt; 0}">&emsp;</span>
+        </td>
+        <td>
+            <span th:if="${#sets.size(doctor.patients) &gt; 1}">
+                <span th:text="|&emsp;${doctor.patients[1].firstName} ${doctor.patients[1].lastName}|"></span>
+            </span>
+            <span th:unless="${#sets.size(doctor.patients) &gt; 1}">&emsp;</span>
+        </td>
+        <td>
+            <span th:if="${#sets.size(doctor.patients) &gt; 2}">
+                <span th:text="|&emsp;${doctor.patients[2].firstName} ${doctor.patients[2].lastName}|"></span>
+            </span>
+            <span th:unless="${#sets.size(doctor.patients) &gt; 2}">&emsp;</span>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
